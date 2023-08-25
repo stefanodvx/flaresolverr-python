@@ -32,7 +32,8 @@ class FlareSolverr:
         headers: dict = None,
         data: dict = None,
         cookies: dict = None,
-        flare_data: dict = None
+        flare_data: dict = None,
+        timeout: int = 10
     ) -> httpx.Response | None:
         solution = await self.resolve(flare_data or {"cmd": "request.get", "url": url})
         headers = (headers or {}) | solution["headers"] | {"User-Agent": solution["userAgent"]}
@@ -42,5 +43,6 @@ class FlareSolverr:
             url=url,
             headers=headers,
             cookies=cookies,
-            data=data
+            data=data,
+            timeout=timeout
         )
